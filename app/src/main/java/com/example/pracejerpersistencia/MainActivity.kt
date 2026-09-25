@@ -28,9 +28,39 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracEjerPersistenciaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    //ExperimentoPersistencia()
+                    Column(modifier = Modifier.padding(innerPadding)) {
+                        Ejercicio1()//¿Qué significa persistir?
+                    }
                 }
             }
+        }
+    }
+}
+//Ejercicio 1 ¿Qué significa persistir?
+@Composable
+fun Ejercicio1(){
+    Column() {
+        Text(text = "Ejercicio 1", modifier = Modifier.padding(start = 175.dp, top = 10.dp))
+        ExperimentoPersistencia()
+    }
+}
+@Composable
+fun ExperimentoPersistencia(){
+    var nombre by remember { mutableStateOf("") }
+    var contador by remember { mutableStateOf(0) }
+    Column(modifier = Modifier.padding(8.dp)) {
+        TextField(
+            value = nombre,
+            onValueChange = {nombre = it}, //Se ejecuta cada vez que el usuario escribe o modifica algo.
+            // it representa el nuevo texto.
+            label = {Text("Nombre")}
+        )
+        Text("Contador: $contador")
+        Button(onClick = {contador+=1}) {
+            Text("+1")
+        }
+        Button(onClick = {contador=0}) {
+            Text("Reiniciar")
         }
     }
 }
